@@ -1,0 +1,105 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ rootNamespace }}Http\Controllers\Controller;
+use {{ namespacedRequests }}
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Lib\Image;
+use App\Traits\ChecksPermission;
+
+class {{ class }} extends Controller
+{
+    use ChecksPermission;
+    protected string $permissionPrefix = '';
+
+    public function index()
+    {
+        return view('admin.{{ modelVariable }}.index', [
+            'all_data' => {{ model }}::all()
+        ]);
+    }
+
+    public function create()
+    {
+        return view('admin.{{ modelVariable }}.create');
+    }
+
+    public function store({{ storeRequest }} $request)
+    {
+        $request->validate([
+            'name'  => 'required|unique:languages',
+            'phone' => 'required|min:11|max:11',
+            'image' => 'image|mimes:jpeg,png,jpg|max:1024'
+        ]);
+
+        $insert_row = new {{ model }};
+        $insert_row->name = $request->name;
+        if(!empty($request->image)){
+            $insert_row->image = Image::store("image","upload/{{ modelVariable }}");
+        }
+        $insert_row->added_by = Auth::id();
+        $insert_row->created_at = Carbon::now();
+        if($insert_row->save()){
+            session()->flash('success', '{{ model }} Created Successfully');
+            return back();
+        }
+        else{
+            session()->flash('error', 'Somethin Went Wrong');
+            return back();
+        }
+    }
+
+    public function show({{ model }} ${{ modelVariable }})
+    {
+        return view('admin.{{ modelVariable }}.show', compact('{{ modelVariable }}'));
+    }
+
+    public function edit({{ model }} ${{ modelVariable }})
+    {
+        return view('admin.{{ modelVariable }}.edit', compact('{{ modelVariable }}'));
+    }
+
+    public function update({{ updateRequest }} $request, {{ model }} ${{ modelVariable }})
+    {
+        $request->validate([
+            'name'  => 'required|unique:languages',
+            'phone' => 'required|min:11|max:11',
+            'image' => 'image|mimes:jpeg,png,jpg|max:1024'
+        ]);
+
+        ${{ modelVariable }}->name = $request->name;
+        ${{ modelVariable }}->phone = $request->phone;
+        if(!empty($request->image)){
+            Image::delete(${{ modelVariable }}->image);
+            $insert_row->image = Image::store("image","upload/{{ modelVariable }}");
+        }
+        ${{ modelVariable }}->added_by = Auth::id();
+        ${{ modelVariable }}->updated_at = Carbon::now();
+        if(${{ modelVariable }}->save()){
+            session()->flash('success', '{{ model }} Created Successfully');
+            return back();
+        }
+        else{
+            session()->flash('error', 'Somethin Went Wrong');
+            return back();
+        }
+    }
+
+    public function destroy({{ model }} ${{ modelVariable }})
+    {   
+        if(${{ modelVariable }}->image){
+            Image::delete(${{ modelVariable }}->image);
+        }
+        if(${{ modelVariable }}->delete()){
+            session()->flash('success', '{{ model }} Deleted Successfully');
+            return back();
+        }
+        else{
+            session()->flash('error', 'Somethin Went Wrong');
+            return back();
+        }
+    }
+}

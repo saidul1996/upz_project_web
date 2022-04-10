@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+</head>
+<body class="font-sans antialiased">
+<div class="min-h-screen bg-gray-100">
+@include('admin.layouts.navigation')
+
+
+<!-- Page Heading -->
+<header class="bg-white shadow">
+    <div class="max-w-8xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        {{ $header }}
+    </div>
+</header>
+
+ <!-- Page Content -->
+ <main>
+    {{ $slot }}
+</main>
+
+
+
+    {{ $script ?? '' }}
+
+</div>
+<script>
+    var sideBar = document.getElementById("mobile-nav");
+    var openSidebar = document.getElementById("openSideBar");
+    var closeSidebar = document.getElementById("closeSideBar");
+    sideBar.style.transform = "translateX(-260px)";
+
+    function sidebarHandler(flag) {
+        if (flag) {
+            sideBar.style.transform = "translateX(0px)";
+            openSidebar.classList.add("hidden");
+            closeSidebar.classList.remove("hidden");
+        } else {
+            sideBar.style.transform = "translateX(-260px)";
+            closeSidebar.classList.add("hidden");
+            openSidebar.classList.remove("hidden");
+        }
+    }
+</script>
+</body>
+</html>
