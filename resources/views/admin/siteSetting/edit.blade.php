@@ -54,7 +54,7 @@ active
                     <div class="col-lg-6 my-2">
                         <div class="form-group">
                             <label class="form-control-label">{{__('Phone')}}: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="number" name="phone" value="{{ $siteSetting->phone?? old('phone') }}" placeholder="{{__('Enter Phone No')}}">
+                            <input class="form-control" type="text" name="phone" value="{{ $siteSetting->phone?? old('phone') }}" placeholder="{{__('Enter Phone No')}}">
                         </div>
                     </div><!-- col-6 -->
                     <div class="col-lg-6 my-2">

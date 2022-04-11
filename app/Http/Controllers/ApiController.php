@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\User;
+use App\Models\SiteSetting;
+use App\Models\Banner;
+
 
 class ApiController extends Controller
 {
@@ -34,6 +37,32 @@ class ApiController extends Controller
         else{
             return response()->json(['message' => "Your old password does not matched!!"], 201);
         }
+    }
+
+    public function siteSetting(Request $request)
+    {
+        $fields = explode(',',$request->fields);
+        if(strlen($request->fields)){
+            $fields = array_intersect($fields,array_keys(SiteSetting::first()->toArray()));
+        }
+        else{
+            $fields = ["*"];
+        }
+        $siteSetting = SiteSetting::select($fields)->first();
+        return response()->json(['siteSetting' => $siteSetting], 201);
+    }
+
+    public function bannerList(Request $request)
+    {
+        $fields = explode(',',$request->fields);
+        if(strlen($request->fields)){
+            $fields = array_intersect($fields,array_keys(Banner::first()->toArray()));
+        }
+        else{
+            $fields = ["*"];
+        }
+        $banner = Banner::select($fields)->first();
+        return response()->json(['banner' => $banner], 201);
     }
 
     function categoryWiseProduct(){
@@ -66,6 +95,8 @@ class ApiController extends Controller
         });
         return response()->json(['allCategory' => $all_category], 201);
     }
+
+
 
     public function allProductWithCategory(Request $request){
         $all_product_with_category = Product::where([['category_id', $request->cat_id],['status', 0]])->get();

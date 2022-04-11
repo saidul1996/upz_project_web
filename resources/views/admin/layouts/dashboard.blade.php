@@ -44,7 +44,7 @@
   <body>
 
     <!-- ########## START: LEFT PANEL ########## -->
-    <div class="sl-logo d-print-none"><a href="{{ route('admin.dashboard') }}"><i class="icon ion-android-star-outline"></i> {{__(App\Models\SiteSetting::first()->value('name')??'')}}</a></div>
+    <div class="sl-logo d-print-none"><a style="font-size:18px;s" href="{{ route('admin.dashboard') }}"><i class="icon ion-android-star-outline"></i> {{__(App\Models\SiteSetting::first()->value('name')??'')}}</a></div>
     <div class="sl-sideleft d-print-none">
       <div class="input-group input-group-search">
         <input type="search" name="search" class="form-control" placeholder="{{__('Search')}}">
@@ -98,6 +98,25 @@
           @endcan
           @can('user-read')
           <li class="nav-item"><a href="{{ route('admin.user.index') }}" class="nav-link @yield('userlist')">{{__('User List')}}</a></li>
+          @endcan
+        </ul>
+        @endcan
+
+        <!-- Banner Module -->
+        @can('banner-*')
+        <a href="{{ route('admin.user.index') }}" class="sl-menu-link @yield('bannermenu')">
+          <div class="sl-menu-item">
+            <!-- <i class="menu-item-icon icon ion-ios-contact tx-20"></i> -->
+            <span class="menu-item-label">{{__('Banner')}}</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          @can('banner-create')
+          <li class="nav-item"><a href="{{ route('admin.banner.create') }}" class="nav-link @yield('bannercreate')">{{__('Create Banner')}}</a></li>
+          @endcan
+          @can('banner-read')
+          <li class="nav-item"><a href="{{ route('admin.banner.index') }}" class="nav-link @yield('bannerlist')">{{__('Banner List')}}</a></li>
           @endcan
         </ul>
         @endcan

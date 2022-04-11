@@ -23,7 +23,8 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::post('/login', [ApiController::class, 'login']);
-Route::get('/allCategory', [ApiController::class, 'allCategory']);
+Route::get('/siteSetting', [ApiController::class, 'siteSetting']);
+Route::get('/banner', [ApiController::class, 'bannerList']);
 Route::post('/allProductWithCategory', [ApiController::class, 'allProductWithCategory']);
 Route::get('/categoryWiseProduct', [ApiController::class, 'categoryWiseProduct']);
 Route::post('/productDetails', [ApiController::class, 'productDetails']);

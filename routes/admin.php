@@ -74,6 +74,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::resource('language', LanguageController::class);
     Route::resource('languageKey', LanguageKeyController::class);
     Route::resource('siteSetting', SiteSettingController::class);
+    Route::resource('banner', BannerController::class);
 
     Route::get('languageSelect', [LanguageSelectController::class, 'languageSelect'])->name('language.select');
     Route::post('languageSelect', [LanguageSelectController::class, 'languageSelection'])->name('language.select');
