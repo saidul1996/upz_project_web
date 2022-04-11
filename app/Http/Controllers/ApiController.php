@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Models\User;
 use App\Models\SiteSetting;
 use App\Models\Banner;
-
+use App\Models\Admin;
+use App\Models\AdminDetail;
 
 class ApiController extends Controller
 {
@@ -63,6 +64,33 @@ class ApiController extends Controller
         }
         $banner = Banner::select($fields)->first();
         return response()->json(['banner' => $banner], 201);
+    }
+
+    public function adminRegister(Request $request)
+    {
+        $insert_row_id = Admin::insertGetId([
+            'name'       => $request->name,
+            'email'      => $request->email,
+            'roll'       => $request->roll,
+            'password'   => Hash::make($request->password),
+            'status'     => 0,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $admin_detail = new AdminDetail;
+        $admin_detail->admin_id = $insert_row_id;
+        $admin_detail->phone = $request->phone;
+        $admin_detail->nid_no = $request->nid_no;
+        $admin_detail->date_of_birth = $request->date_of_birth;
+        $admin_detail->address = $request->address;
+        $admin_detail->gender = $request->gender;
+
+        if($admin_detail->save()){
+            return response()->json(['message' => "Your data submitted successfully!"], 201);
+        }
+        else{
+            return response()->json(['message' => "Something went wrong!!"], 201);
+        }
     }
 
     function categoryWiseProduct(){
