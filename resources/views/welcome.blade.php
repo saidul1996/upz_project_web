@@ -94,7 +94,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1>Make Your Business More Profitable Test</h1>
+                        <h1>Make Your Business More Profitable</h1>
                         <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
                         @if (Route::has('login'))
                             <div class="link">
