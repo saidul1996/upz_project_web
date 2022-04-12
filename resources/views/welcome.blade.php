@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Store Management</title>
+        <title>{{App\Models\SiteSetting::first()->value('name')??''}}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -87,6 +87,27 @@
             .admin-btn{
                 background: #BC6FF1;
             }
+            @media only screen and (max-width: 550px) {
+                .background{
+                    height: auto;
+                }
+                .background img{
+                    height: 100%;
+                    margin-top: 50px;
+                    margin-bottom: 150px;
+                }
+                .background h1{
+                    font-weight: 600;
+                    font-size: 30px;
+                    line-height: 1.5;
+                    margin-top: 50px;
+                    text-align:center;
+                }
+                .link{
+                    margin-top: 120px;
+                    text-align:center;
+                }
+            }
         </style>
     </head>
     <body class="antialiased">
@@ -94,7 +115,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1>Make Your Business More Profitable</h1>
+                        <h1>Think Digital & Make Everything Digital</h1>
                         <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
                         @if (Route::has('login'))
                             <div class="link">

@@ -15,7 +15,7 @@ active
 @section('content')
 
 <nav class="breadcrumb sl-breadcrumb">
-    <a class="breadcrumb-item" href="{{ route('admin.dashboard') }}">{{__('NAGORIK SHEBA')}}</a>
+    <a class="breadcrumb-item" href="{{ route('admin.dashboard') }}">{{__(App\Models\SiteSetting::first()->value('name')??'')}}</a>
     <span class="breadcrumb-item active">{{__('Banner')}}</span>
 </nav>
 
