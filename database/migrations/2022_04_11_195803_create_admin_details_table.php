@@ -15,8 +15,8 @@ class CreateAdminDetailsTable extends Migration
     {
         Schema::create('admin_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('admin_id');
-            $table->string('phone')->nullable();
+            $table->integer('admin_id')->nullable();
+            $table->string('phone');
             $table->string('nid_no')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('address')->nullable();

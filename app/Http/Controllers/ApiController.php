@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Models\User;
 use App\Models\SiteSetting;
 use App\Models\Banner;
+use App\Models\District;
+use App\Models\Upazilla;
+use App\Models\Union;
 use App\Models\Admin;
 use App\Models\AdminDetail;
 
@@ -66,24 +69,38 @@ class ApiController extends Controller
         return response()->json(['banner' => $banner], 201);
     }
 
+    public function allDistrict()
+    {
+        return response()->json(['districts' => District::all()], 201);
+    }
+
+    public function allUpazilla()
+    {
+        return response()->json(['upazillas' => Upazilla::all()], 201);
+    }
+
+    public function allUnion()
+    {
+        return response()->json(['unions' => Union::all()], 201);
+    }
+
     public function adminRegister(Request $request)
     {
-        $insert_row_id = Admin::insertGetId([
-            'name'       => $request->name,
-            'email'      => $request->email,
-            'roll'       => $request->roll,
-            'password'   => Hash::make($request->password),
-            'status'     => 0,
-            'created_at' => Carbon::now(),
-        ]);
-
         $admin_detail = new AdminDetail;
-        $admin_detail->admin_id = $insert_row_id;
+        $admin_detail->district_id = $request->district_id;
+        $admin_detail->upazilla_id = $request->upazilla_id;
+        $admin_detail->union_id = $request->union_id;
+        $admin_detail->name = $request->name;
+        $admin_detail->email = $request->email;
+        $admin_detail->roll = $request->roll;
         $admin_detail->phone = $request->phone;
         $admin_detail->nid_no = $request->nid_no;
         $admin_detail->date_of_birth = $request->date_of_birth;
         $admin_detail->address = $request->address;
         $admin_detail->gender = $request->gender;
+        $admin_detail->password = Hash::make($request->password);
+        $admin_detail->status = 0;
+        $admin_detail->created_at = Carbon::now();
 
         if($admin_detail->save()){
             return response()->json(['message' => "Your data submitted successfully!"], 201);

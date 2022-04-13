@@ -27,7 +27,7 @@ class AddRollToAdminsTable extends Migration
     public function down()
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->dropColumn(['roll','remember_token']);
+            $table->dropColumn(['roll','status']);
         });
     }
 }

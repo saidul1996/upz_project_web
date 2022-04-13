@@ -32,6 +32,9 @@ return [
         'UNO' => [
             'user' => 'r',
         ],
+        'Union' => [
+            'user' => 'r',
+        ],
         'Chairman' => [
             'user' => 'r',
         ],

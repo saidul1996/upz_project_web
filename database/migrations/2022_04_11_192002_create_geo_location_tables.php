@@ -5171,7 +5171,7 @@ class CreateGeoLocationTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('division');
+        Schema::dropIfExists('divisions');
         Schema::dropIfExists('districts');
         Schema::dropIfExists('upazillas');
         Schema::dropIfExists('unions');
