@@ -61,6 +61,9 @@ class SiteSettingController extends Controller
         $updated = $siteSetting->save();
 
         if(!empty($request->logo)){
+            if($siteSetting->logo){
+                Image::delete($siteSetting, 'logo');
+            }
             $siteSetting->logo = Image::store("logo","upload/siteSetting/logo");
             $siteSetting->save();
         }

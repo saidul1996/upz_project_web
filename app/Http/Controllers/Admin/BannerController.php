@@ -65,7 +65,7 @@ class BannerController extends Controller
         ]);
 
         if(!empty($request->image)){
-            Image::delete($banner->image);
+            Image::delete($banner, 'image');
             $banner->image = Image::store("image","upload/banner");
             $updated_row = $banner->save();
         }
@@ -88,7 +88,9 @@ class BannerController extends Controller
 
     public function destroy(Banner $banner)
     {
-        Image::delete($banner->image);
+        if($banner->image){
+            Image::delete($banner, 'image');
+        }
         if($banner->delete()){
             session()->flash('success', 'Banner Deleted Successfully');
             return back();

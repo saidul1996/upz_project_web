@@ -10,7 +10,7 @@ class Image
     public static function delete($model, $attribute = null)
     {
         if ($model instanceof Model && $attribute) {
-            $image = $model->getAttributeValue($attribute);
+            $image = $model->getRawOriginal($attribute);
         } else {
             $image = $model;
         }
@@ -32,7 +32,7 @@ class Image
     public static function url($model, $attribute = null)
     {
         if ($model instanceof Model && $attribute) {
-            $image = $model->getAttributeValue($attribute);
+            $image = $model->getRawOriginal($attribute);
         } else {
             $image = $model;
         }
