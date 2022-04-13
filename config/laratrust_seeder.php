@@ -19,6 +19,7 @@ return [
             'languageKey' => 'c,r,u,d',
             'siteSetting' => 'c,r,u,d',
             'banner' => 'c,r,u,d',
+            'dcAdmin' => 'c,r,u,d',
         ],
         'admin' => [
             'user' => 'c,r,u,d',

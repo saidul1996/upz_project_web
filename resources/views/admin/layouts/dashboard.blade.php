@@ -83,6 +83,22 @@
           </ul>
         @endcan
 
+        <!-- DC Admin Module -->
+        @can('dcAdmin-*')
+        <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('dcadminmenu')">
+            <div class="sl-menu-item">
+              <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
+              <span class="menu-item-label">{{__('District Magistrate (DC)')}}</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <ul class="sl-menu-sub nav flex-column">
+            @can('dcAdmin-read')
+            <li class="nav-item"><a href="{{ route('admin.dcAdmin.index') }}" class="nav-link @yield('dcadminlist')">{{__('District Magistrate List')}}</a></li>
+            @endcan
+          </ul>
+        @endcan
+
         <!-- User Module -->
         @can('user-*')
         <a href="{{ route('admin.user.index') }}" class="sl-menu-link @yield('usermenu')">
