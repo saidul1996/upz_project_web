@@ -99,6 +99,54 @@
           </ul>
         @endcan
 
+        <!-- UNO Admin Module -->
+        <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('unoadminmenu')">
+            <div class="sl-menu-item">
+              <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
+              <span class="menu-item-label">{{__('Upazilla Nirbahi Officer (UNO)')}}</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href=" " class="nav-link @yield('unoadminlist')">{{__('Upazilla Nirbahi Officer List')}}</a></li>
+        </ul>
+
+        <!-- UNO Admin Module -->
+        <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('unionadminmenu')">
+            <div class="sl-menu-item">
+              <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
+              <span class="menu-item-label">{{__('Union')}}</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href=" " class="nav-link @yield('unionadminlist')">{{__('Union List')}}</a></li>
+        </ul>
+
+        <!-- UNO Admin Module -->
+        <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('chairmanadminmenu')">
+            <div class="sl-menu-item">
+              <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
+              <span class="menu-item-label">{{__('Chairman')}}</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href=" " class="nav-link @yield('chairmanadminlist')">{{__('Chairman List')}}</a></li>
+        </ul>
+
+        <!-- UNO Admin Module -->
+        <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('udcadminmenu')">
+            <div class="sl-menu-item">
+              <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
+              <span class="menu-item-label">{{__('UDC')}}</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href=" " class="nav-link @yield('udcadminlist')">{{__('UDC Officer List')}}</a></li>
+        </ul>
+
         <!-- User Module -->
         @can('user-*')
         <a href="{{ route('admin.user.index') }}" class="sl-menu-link @yield('usermenu')">
