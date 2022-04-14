@@ -79,5 +79,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
     Route::get('languageSelect', [LanguageSelectController::class, 'languageSelect'])->name('language.select');
     Route::post('languageSelect', [LanguageSelectController::class, 'languageSelection'])->name('language.select');
+    Route::get('adminApprove/{id}', [CommonController::class, 'adminApprove'])->name('admin.approve');
+    Route::get('adminReject/{id}', [CommonController::class, 'adminReject'])->name('admin.reject');
 
 });

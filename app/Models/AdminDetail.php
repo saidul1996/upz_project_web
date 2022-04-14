@@ -13,4 +13,14 @@ class AdminDetail extends Model
     {
         return $this->belongsTo(District::class);
     }
+
+    public function upazilla()
+    {
+        return $this->belongsTo(Upazilla::class);
+    }
+
+    public function union()
+    {
+        return $this->belongsTo(Union::class);
+    }
 }

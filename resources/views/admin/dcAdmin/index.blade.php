@@ -45,20 +45,22 @@ active
               </tr>
             </thead>
             <tbody>
-              @php
-                  $i=1;
-              @endphp
               @foreach ($all_data as $data)
               <tr>
-                <td>{{ $i++ }}</td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->name??'' }}</td>
                 <td>{{ $data->phone??'' }}</td>
                 <td>{{ $data->district->name??'' }}</td>
-                <td>@if($data->status==1) <span class='text-success'> {{__('Active')}} </span> @else<span class='text-warning'>{{ __('Deactivated') }}</span>@endif</td>
-                <td>--
-                    {{--<a title="Show Item" class="mr-2" href="{{route('admin.dcAdmin.show',$data->id)}}"><i class="text-info menu-item-icon icon icon ion-ios-eye tx-24"></i></a>
+                <td>@if($data->status==1) <span class='text-success'> {{__('Active')}} </span>@elseif($data->status==0) <span class='text-warning'> {{__('Pending')}} </span> @else<span class='text-danger'>{{ __('Deactivated') }}</span>@endif</td>
+                <td>
+                    <a title="Show Item" class="mr-2" href="{{route('admin.dcAdmin.show',$data->id)}}"><i class="text-info menu-item-icon icon icon ion-ios-eye tx-24"></i></a>
+                    @if(App\Models\Admin::where([['email', $data->email],['name', $data->name]])->count())
                     <a title="Update Item" class="mr-2" href="{{route('admin.dcAdmin.edit',$data->id)}}"><i class="text-success menu-item-icon icon ion-compose tx-24"></i></a>
-                    <a title="Delete Item" class="mr-2" href="#deleteModal{{$data->id}}" data-toggle="modal"><i class="text-danger menu-item-icon icon ion-android-delete tx-24"></i></a>--}}
+                    <a title="Delete Item" class="mr-2" href="#deleteModal{{$data->id}}" data-toggle="modal"><i class="text-danger menu-item-icon icon ion-android-delete tx-24"></i></a>
+                    @else
+                        <a title="Approved" class="mr-2" href="{{route('admin.admin.approve',$data->id)}}" onClick="return confirm('Are you sure want to approve?')"><i class="text-success fa fa-check-square-o tx-24"></i></a>
+                        <a title="Reject" class="mr-2" href="{{route('admin.admin.reject',$data->id)}}" onClick="return confirm('Are you sure want to reject?')"><i class="text-danger fa fa-times tx-24"></i></a>
+                    @endif
                 </td>
               </tr>
 
