@@ -103,15 +103,17 @@
         <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('unoadminmenu')">
             <div class="sl-menu-item">
               <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
-              <span class="menu-item-label">{{__('Upazilla Nirbahi Officer (UNO)')}}</span>
+              <span class="menu-item-label">{{__('UNO')}}</span>
               <i class="menu-item-arrow fa fa-angle-down"></i>
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href=" " class="nav-link @yield('unoadminlist')">{{__('Upazilla Nirbahi Officer List')}}</a></li>
+            @can('unoAdmin-read')
+            <li class="nav-item"><a href="{{ route('admin.unoAdmin.index') }}" class="nav-link @yield('unoadminlist')">{{__('UNO List')}}</a></li>
+            @endcan
         </ul>
 
-        <!-- UNO Admin Module -->
+        <!-- Union Admin Module -->
         <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('unionadminmenu')">
             <div class="sl-menu-item">
               <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
@@ -120,10 +122,12 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href=" " class="nav-link @yield('unionadminlist')">{{__('Union List')}}</a></li>
+            @can('unionAdmin-read')
+            <li class="nav-item"><a href="{{ route('admin.unionAdmin.index') }}" class="nav-link @yield('unionadminlist')">{{__('Union List')}}</a></li>
+            @endcan
         </ul>
 
-        <!-- UNO Admin Module -->
+        <!-- Chairman Admin Module -->
         <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('chairmanadminmenu')">
             <div class="sl-menu-item">
               <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
@@ -132,10 +136,12 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href=" " class="nav-link @yield('chairmanadminlist')">{{__('Chairman List')}}</a></li>
+            @can('chairmanAdmin-read')
+            <li class="nav-item"><a href="{{ route('admin.chairmanAdmin.index') }}" class="nav-link @yield('chairmanadminlist')">{{__('Chairman List')}}</a></li>
+            @endcan
         </ul>
 
-        <!-- UNO Admin Module -->
+        <!-- UDC Admin Module -->
         <a href="{{ route('admin.admin.index') }}" class="sl-menu-link @yield('udcadminmenu')">
             <div class="sl-menu-item">
               <!-- <i class="fa fa-unlock-alt" aria-hidden="true"></i> -->
@@ -144,7 +150,9 @@
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href=" " class="nav-link @yield('udcadminlist')">{{__('UDC Officer List')}}</a></li>
+            @can('udcAdmin-read')
+            <li class="nav-item"><a href="{{ route('admin.udcAdmin.index') }}" class="nav-link @yield('udcadminlist')">{{__('UDC Officer List')}}</a></li>
+            @endcan
         </ul>
 
         <!-- User Module -->

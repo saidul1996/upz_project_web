@@ -5,25 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Models\AdminDetail;
 use App\Models\Admin;
 use App\Models\District;
+use App\Models\Union;
 use App\Models\Upazilla;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Lib\Image;
 use App\Traits\ChecksPermission;
 
-class DcAdminController extends Controller
+class UnoAdminController extends Controller
 {
     use ChecksPermission;
-    protected string $permissionPrefix = 'dcAdmin';
+    protected string $permissionPrefix = 'unoAdmin';
 
     public function index()
     {
-        return view('admin.dcAdmin.index', [
-            'all_data' => AdminDetail::where('roll', 3)->get()
+        return view('admin.unoAdmin.index', [
+            'all_data' => AdminDetail::where('roll', 4)->get()
         ]);
     }
 
@@ -40,13 +40,13 @@ class DcAdminController extends Controller
     public function show($id)
     {
         $data = AdminDetail::find($id);
-        return view('admin.dcAdmin.show', compact('data'));
+        return view('admin.unoAdmin.show', compact('data'));
     }
 
     public function edit($id)
     {
         $data = AdminDetail::find($id);
-        return view('admin.dcAdmin.edit', compact('data'));
+        return view('admin.unoAdmin.edit', compact('data'));
     }
 
     public function update(Request $request, $id)
@@ -90,12 +90,12 @@ class DcAdminController extends Controller
         $adminDetail->added_by = Auth::id();
         $adminDetail->updated_at = Carbon::now();
         if($adminDetail->save()){
-            session()->flash('success', 'DC Info Updated Successfully');
-            return redirect()->route('admin.dcAdmin.index');
+            session()->flash('success', 'UNO Info Updated Successfully');
+            return redirect()->route('admin.unoAdmin.index');
         }
         else{
             session()->flash('error', 'Somethin Went Wrong');
-            return redirect()->route('admin.dcAdmin.index');
+            return redirect()->route('admin.unoAdmin.index');
         }
     }
 
@@ -103,13 +103,13 @@ class DcAdminController extends Controller
     {
         $adminDetail = AdminDetail::find($id);
 
-        if( $count = AdminDetail::whereIn('upazilla_id', Upazilla::where('district_id', $adminDetail->district_id)->pluck('id'))->count()){
-            session()->flash('error', $count.' UNO Has Under This DC!');
+        if( $count = AdminDetail::whereIn('union_id', Union::where('upazilla_id', $adminDetail->upazilla_id)->pluck('id'))->count()){
+            session()->flash('error', $count.' Union/Chairman/UDC Has Under This UNO!');
             return back();
         }
         else{
             if(Admin::where('id', $adminDetail->admin_id)->delete() AND $adminDetail->delete()){
-                session()->flash('success', 'DC Deleted Successfully');
+                session()->flash('success', 'UNO Deleted Successfully');
                 return back();
             }
             else{
@@ -118,4 +118,5 @@ class DcAdminController extends Controller
             }
         }
     }
+
 }

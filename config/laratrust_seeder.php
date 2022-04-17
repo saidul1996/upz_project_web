@@ -20,6 +20,10 @@ return [
             'siteSetting' => 'c,r,u,d',
             'banner' => 'c,r,u,d',
             'dcAdmin' => 'c,r,u,d',
+            'unoAdmin' => 'c,r,u,d',
+            'unionAdmin' => 'c,r,u,d',
+            'chairmanAdmin' => 'c,r,u,d',
+            'udcAdmin' => 'c,r,u,d',
         ],
         'admin' => [
             'user' => 'c,r,u,d',
@@ -29,9 +33,16 @@ return [
         ],
         'DC' => [
             'user' => 'r',
+            'unoAdmin' => 'r',
+            'unionAdmin' => 'r',
+            'chairmanAdmin' => 'r',
+            'udcAdmin' => 'r',
         ],
         'UNO' => [
             'user' => 'r',
+            'unionAdmin' => 'r',
+            'chairmanAdmin' => 'r',
+            'udcAdmin' => 'r',
         ],
         'Union' => [
             'user' => 'r',

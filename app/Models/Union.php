@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Union extends Model
 {
     use HasFactory;
+
+    public function upazilla()
+    {
+        return $this->belongsTo(Upazilla::class);
+    }
 }

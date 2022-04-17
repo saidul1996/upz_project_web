@@ -1,11 +1,11 @@
 @extends('admin.layouts.dashboard')
 @section('title')
-{{__('DC Admin')}}
+{{__('UNO Admin')}}
 @endsection
-@section('dcadminmenu')
+@section('unoadminmenu')
 active show-sub
 @endsection
-@section('dcadminlist')
+@section('unoadminlist')
 active
 @endsection
 @section('css')
@@ -16,7 +16,7 @@ active
 
 <nav class="breadcrumb sl-breadcrumb">
     <a class="breadcrumb-item" href="{{ route('admin.dashboard') }}">{{__(App\Models\SiteSetting::first()->value('name')??'')}}</a>
-    <span class="breadcrumb-item active">{{__('DC')}}</span>
+    <span class="breadcrumb-item active">{{__('UNO')}}</span>
 </nav>
 
 <div class="sl-pagebody">
@@ -28,7 +28,7 @@ active
             <p class="mg-b-20 mg-sm-b-30">{{ __('You may select and view details') }}</p>
         </div>
         {{--<div class="col-5 text-right">
-            <a class="btn btn-info" href="{{ route('admin.dcAdmin.create') }}">{{ __('Create New') }}</a>
+            <a class="btn btn-info" href="{{ route('admin.unoAdmin.create') }}">{{ __('Create New') }}</a>
         </div>--}}
       </div>
       @include('partials.message')
@@ -38,9 +38,10 @@ active
               <tr>
                 <th class="wd-5p">{{ __('SI') }}</th>
                 <th class="wd-20p text-center">{{ __('Name') }}</th>
-                <th class="wd-20p text-center">{{ __('Phone') }}</th>
-                <th class="wd-20p text-center">{{ __('District') }}</th>
-                <th class="wd-20p text-center">{{ __('Status') }}</th>
+                <th class="wd-15p text-center">{{ __('Phone') }}</th>
+                <th class="wd-15p text-center">{{ __('District') }}</th>
+                <th class="wd-15p text-center">{{ __('Upazilla') }}</th>
+                <th class="wd-15p text-center">{{ __('Status') }}</th>
                 <th class="wd-15p text-center">{{ __('Action') }}</th>
               </tr>
             </thead>
@@ -50,12 +51,13 @@ active
                 <td>{{ $loop->iteration }}</td>
                 <td class="text-center">{{ $data->name??'' }}</td>
                 <td class="text-center">{{ $data->phone??'' }}</td>
-                <td class="text-center">{{ $data->district->name??'' }}</td>
+                <td class="text-center">{{ $data->upazilla->district->name??'' }}</td>
+                <td class="text-center">{{ $data->upazilla->name??'' }}</td>
                 <td class="text-center">@if($data->status==1) <span class='text-success'> {{__('Active')}} </span>@elseif($data->status==0) <span class='text-warning'> {{__('Pending')}} </span> @else<span class='text-danger'>{{ __('Deactivated') }}</span>@endif</td>
                 <td class="text-center">
-                    <a title="Show Item" class="mr-2" href="{{route('admin.dcAdmin.show',$data->id)}}"><i class="text-info menu-item-icon icon icon ion-ios-eye tx-24"></i></a>
+                    <a title="Show Item" class="mr-2" href="{{route('admin.unoAdmin.show',$data->id)}}"><i class="text-info menu-item-icon icon icon ion-ios-eye tx-24"></i></a>
                     @if(App\Models\Admin::where([['email', $data->email],['name', $data->name]])->count())
-                    <a title="Update Item" class="mr-2" href="{{route('admin.dcAdmin.edit',$data->id)}}"><i class="text-success menu-item-icon icon ion-compose tx-24"></i></a>
+                    <a title="Update Item" class="mr-2" href="{{route('admin.unoAdmin.edit',$data->id)}}"><i class="text-success menu-item-icon icon ion-compose tx-24"></i></a>
                     <a title="Delete Item" class="mr-2" href="#deleteModal{{$data->id}}" data-toggle="modal"><i class="text-danger menu-item-icon icon ion-android-delete tx-24"></i></a>
                     @else
                         <a title="Approved" class="mr-2" href="{{route('admin.admin.approve',$data->id)}}" onClick="return confirm('Are you sure want to approve?')"><i class="text-success fa fa-check-square-o tx-24"></i></a>
@@ -75,7 +77,7 @@ active
                                 <h5 class="modal-title" id="exampleModalLongTitle">{{ __('Are you sure you want to delete ?') }}</h5>
                             </div>
                             <div class="modal-footer">
-                                <form action="{{route('admin.dcAdmin.destroy',$data->id)}}" method="POST">
+                                <form action="{{route('admin.unoAdmin.destroy',$data->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-info mg-r-5" type="submit">{{ __('Submit') }}</button>

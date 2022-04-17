@@ -76,10 +76,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::resource('siteSetting', SiteSettingController::class);
     Route::resource('banner', BannerController::class);
     Route::resource('dcAdmin', DcAdminController::class);
-    Route::resource('unoAdmin', DcAdminController::class);
-    Route::resource('unionAdmin', DcAdminController::class);
-    Route::resource('chairmanAdmin', DcAdminController::class);
-    Route::resource('udcAdmin', DcAdminController::class);
+    Route::resource('unoAdmin', UnoAdminController::class);
+    Route::resource('unionAdmin', UnionAdminController::class);
+    Route::resource('chairmanAdmin', ChairmanAdminController::class);
+    Route::resource('udcAdmin', UdcAdminController::class);
 
     Route::get('languageSelect', [LanguageSelectController::class, 'languageSelect'])->name('language.select');
     Route::post('languageSelect', [LanguageSelectController::class, 'languageSelection'])->name('language.select');
